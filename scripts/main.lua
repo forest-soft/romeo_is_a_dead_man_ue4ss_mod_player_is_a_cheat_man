@@ -58,8 +58,14 @@ ExecuteInGameThread(function()
 				row_data.ParamaterBMin = row_data.ParamaterBMin * setting_busters_power_up_ratio
 				row_data.ParamaterBMax = row_data.ParamaterBMax * setting_busters_power_up_ratio
 				
-				row_data.ParamaterCMin = row_data.ParamaterCMin * setting_busters_power_up_ratio
-				row_data.ParamaterCMax = row_data.ParamaterCMax * setting_busters_power_up_ratio
+				if row_data.ParamaterCMax < row_data.ParamaterCMin then
+					-- 「ウィークンフラワー」や「グラハ・マラ」はレベル上昇に伴って数値が低くなるタイプなので、割合で数値を減らすようにする。
+					row_data.ParamaterCMin = row_data.ParamaterCMin / setting_busters_power_up_ratio
+					row_data.ParamaterCMax = row_data.ParamaterCMax / setting_busters_power_up_ratio
+				else
+					row_data.ParamaterCMin = row_data.ParamaterCMin * setting_busters_power_up_ratio
+					row_data.ParamaterCMax = row_data.ParamaterCMax * setting_busters_power_up_ratio
+				end
 			end)
 		end
 	end
